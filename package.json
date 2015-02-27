@@ -2,10 +2,6 @@
   "name": "static-react",
   "version": "1.0.0",
   "description": "React static site generator",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ./build.js"
-  },
   "author": "Brent Jackson",
   "license": "MIT",
   "devDependencies": {
@@ -14,11 +10,23 @@
     "node-jsx": "^0.12.4",
     "parallelshell": "^1.0.4",
     "react": "^0.12.2",
+    "react-async": "^2.0.1",
     "react-router": "^0.12.4",
+    "react-router-component": "^0.24.1",
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "uglify": "^0.1.1",
     "watch": "^0.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./build.js",
+    "browserify": "browserify client.js -o js/app.js"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
   },
   "stylesheet": "http://d2v52k3cl9vedd.cloudfront.net/basscss/5.0.0/basscss.min.css"
 }

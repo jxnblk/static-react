@@ -1,39 +1,53 @@
 
 var React = require('react');
 
-//var Router = require('react-router');
-//var DefaultRoute = Router.DefaultRoute;
-//var Link = Router.Link;
-//var Route = Router.Route;
-//var RouteHandler = Router.RouteHandler;
+var Router = require('react-router-component');
+
+var Pages = Router.Pages;
+var Page = Router.Page;
+
+var Locations = Router.Locations;
+var Location = Router.Location;
+var NotFound = Router.NotFound;
+var Link = Router.Link;
 
 var Head = require('./head.jsx');
+var Header = require('./header.jsx');
+var View = require('./view.jsx');
+
+// Pages
+var Home = require('./home.jsx');
+var About = require('./about.jsx');
+var NotFoundPage = require('./not-found-page.jsx');
 
 var Root = React.createClass({
 
   statics: {
-
     getRoutes: function() {
       return [
-        '/',
+        { name: 'home', path: '/' },
+        { name: 'about', path: '/about' },
+        // Not found page?
       ];
     },
-
-    renderToString: function(props) {
-      return '<!DOCTYPE html>' +
-        React.renderToString(<Root {...props} />);
+    renderToString: function(props, url) {
+      var html = '<!DOCTYPE html>';
+      html += React.renderToString(<Root {...props} path={url} />);
+      return html;
     },
-
   },
 
 
   render: function() {
+    var path = this.props.path || null;
     return (
       <html>
         <Head {...this.props} />
         <body>
-          <h1 className="red">React Static test</h1>
-          {/*<Link to="home">Dashboard</Link> */}
+          <Header />
+          <Locations path={path}>
+            <Location path={'*'} handler={View} />
+          </Locations>
           <script src="js/app.js" />
         </body>
       </html>
@@ -41,18 +55,6 @@ var Root = React.createClass({
   }
 
 });
-
-//var routes = (
-//  <Route name="app" path="/" handler={App}>
-//    <Route name="inbox" handler={Inbox}/>
-//    <Route name="calendar" handler={Calendar}/>
-//    <DefaultRoute handler={Dashboard}/>
-//  </Route>
-//);
-
-//Router.run(routes, function (Handler) {
-//    React.render(<Handler/>, document.body);
-//});
 
 module.exports = Root;
 
