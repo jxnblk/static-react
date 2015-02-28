@@ -8,7 +8,8 @@ var Root = React.createFactory(require('./src/root.jsx'));
 var View = React.createFactory(require('./src/view.jsx'));
 var data = require('./data');
 
-React.render(Root(data), document.body);
+React.render(Root(window.INITIAL_PROPS), document);
+
 
 
 },{"./data":2,"./src/root.jsx":179,"./src/view.jsx":180,"react":172,"react-router-component":6}],2:[function(require,module,exports){
@@ -19863,13 +19864,17 @@ module.exports={
     "react-router-component": "^0.24.1",
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
+    "rebass": "0.0.1",
     "uglify": "^0.1.1",
     "watch": "^0.14.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node ./build.js",
-    "browserify": "browserify client.js -o js/app.js"
+    "watch:build": "watch 'npm run build' ./src",
+    "browserify": "browserify client.js -o js/app.js",
+    "watch:browserify": "watch 'npm run browserify' ./src",
+    "start": "parallelshell 'npm run watch:build' 'npm run watch:browserify' 'http-server -p 8000'"
   },
   "browserify": {
     "transform": [
@@ -19939,7 +19944,9 @@ var React = require('react');
 module.exports = React.createClass({displayName: "exports",
   render: function() {
     return (
-      React.createElement("h1", null, "Home")
+      React.createElement("div", null, 
+        React.createElement("h1", null, "Home")
+      )
     )
   }
 });
@@ -20000,16 +20007,20 @@ var Root = React.createClass({displayName: "Root",
 
 
   render: function() {
-    var path = this.props.path || null;
+    var browserInitScriptObj = {
+      __html:
+        "window.INITIAL_PROPS = " + JSON.stringify(this.props) + ";\n"
+    };
     return (
       React.createElement("html", null, 
         React.createElement(Head, React.__spread({},  this.props)), 
         React.createElement("body", null, 
           React.createElement(Header, null), 
-          React.createElement(Locations, {path: path}, 
-            React.createElement(Location, {path: '*', handler: View})
+          React.createElement(Locations, {path: this.props.path}, 
+            React.createElement(Location, {path: "*", handler: View})
           ), 
-          React.createElement("script", {src: "js/app.js"})
+          React.createElement("script", {dangerouslySetInnerHTML: browserInitScriptObj}), 
+          React.createElement("script", {src: "/js/app.js"})
         )
       )
     )
@@ -20027,9 +20038,6 @@ var React = require('react');
 
 var Router = require('react-router-component');
 
-var Pages = Router.Pages;
-var Page = Router.Page;
-
 var Locations = Router.Locations;
 var Location = Router.Location;
 var NotFound = Router.NotFound;
@@ -20039,6 +20047,8 @@ var Link = Router.Link;
 var Home = require('./home.jsx');
 var About = require('./about.jsx');
 var NotFoundPage = require('./not-found-page.jsx');
+
+/// <Header />
 
 module.exports = React.createClass({displayName: "exports",
   render: function() {

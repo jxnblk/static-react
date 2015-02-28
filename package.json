@@ -21,7 +21,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node ./build.js",
-    "browserify": "browserify client.js -o js/app.js"
+    "watch:build": "watch 'npm run build' ./src",
+    "browserify": "browserify client.js -o js/app.js",
+    "watch:browserify": "watch 'npm run browserify' ./src",
+    "start": "parallelshell 'npm run watch:build' 'npm run watch:browserify' 'http-server -p 8000'"
   },
   "browserify": {
     "transform": [

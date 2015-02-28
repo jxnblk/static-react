@@ -39,16 +39,20 @@ var Root = React.createClass({
 
 
   render: function() {
-    var path = this.props.path || null;
+    var browserInitScriptObj = {
+      __html:
+        "window.INITIAL_PROPS = " + JSON.stringify(this.props) + ";\n"
+    };
     return (
       <html>
         <Head {...this.props} />
         <body>
           <Header />
-          <Locations path={path}>
-            <Location path={'*'} handler={View} />
+          <Locations path={this.props.path}>
+            <Location path="*" handler={View} />
           </Locations>
-          <script src="js/app.js" />
+          <script dangerouslySetInnerHTML={browserInitScriptObj} />
+          <script src="/js/app.js" />
         </body>
       </html>
     )
