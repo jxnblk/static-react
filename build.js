@@ -5,12 +5,13 @@ require('node-jsx').install();
 
 var data = require('./data');
 var Root = require('./src/root.jsx');
-//var App = require('./src/app.jsx');
+var App = require('./src/app.jsx');
 
 Root.getRoutes().forEach(function(route) {
     data.path = route.path;
 
     var html = Root.renderToString(data);
+    //var html = App.renderToString(data);
     var dir = '.' + route.path + '/';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);

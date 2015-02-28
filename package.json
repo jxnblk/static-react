@@ -21,7 +21,7 @@
     "watch": "^0.14.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "browserify test/client.js -o test/bundle.js && node test/build",
     "build": "node ./build.js",
     "watch:build": "watch 'npm run build' ./src",
     "browserify": "browserify client.js -o js/app.min.js",
@@ -30,9 +30,17 @@
   },
   "browserify": {
     "transform": [
-      ["envify", { "NODE_ENV": "production" }],
+      [
+        "envify",
+        {
+          "NODE_ENV": "production"
+        }
+      ],
       "reactify",
       "uglifyify"
     ]
+  },
+  "dependencies": {
+    "lodash": "^3.3.1"
   }
 }

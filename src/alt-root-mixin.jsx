@@ -6,7 +6,6 @@ var Locations = Router.Locations;
 var Location = Router.Location;
 var NotFound = Router.NotFound;
 
-var Layout = require('./layout.jsx');
 var Head = require('./head.jsx');
 var Header = require('./header.jsx');
 
@@ -16,7 +15,7 @@ var About = require('./about.jsx');
 var NotFoundPage = require('./not-found-page.jsx');
 
 
-var Root = React.createClass({
+module.exports = {
 
   statics: {
     getRoutes: function() {
@@ -27,26 +26,40 @@ var Root = React.createClass({
     },
     renderToString: function(props) {
       var html = '<!DOCTYPE html>';
-      html += React.renderToString(<Root {...props} />);
+      html += React.renderToString(this(props));
       return html;
     },
   },
 
 
   render: function() {
+    var browserInitScriptObj = {
+      __html:
+        "window.INITIAL_PROPS = " + JSON.stringify(this.props) + ";\n"
+    };
+    var script = this.props.script;
+    var renderLocation = function(route) {
+      return (
+        <Location path={route.path} handler={route.handler} />
+      )
+    };
     return (
-      <Layout {...this.props}>
+      <html>
+        <Head {...this.props} />
+        <body>
           <Header />
           <Locations path={this.props.path}>
             <Location path="/" handler={Home} />
             <Location path="/about" handler={About} />
             <NotFound handler={NotFoundPage} />
           </Locations>
-      </Layout>
+          <script dangerouslySetInnerHTML={browserInitScriptObj} />
+          <script src={script} />
+        </body>
+      </html>
     )
   }
 
-});
+};
 
-module.exports = Root;
 
