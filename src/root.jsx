@@ -30,9 +30,9 @@ var Root = React.createClass({
         // Not found page?
       ];
     },
-    renderToString: function(props, url) {
+    renderToString: function(props) {
       var html = '<!DOCTYPE html>';
-      html += React.renderToString(<Root {...props} path={url} />);
+      html += React.renderToString(<Root {...props} />);
       return html;
     },
   },
@@ -52,7 +52,7 @@ var Root = React.createClass({
             <Location path="*" handler={View} />
           </Locations>
           <script dangerouslySetInnerHTML={browserInitScriptObj} />
-          <script src="/js/app.js" />
+          <script src="/js/app.min.js" />
         </body>
       </html>
     )

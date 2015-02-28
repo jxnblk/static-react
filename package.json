@@ -6,6 +6,7 @@
   "license": "MIT",
   "devDependencies": {
     "browserify": "^9.0.3",
+    "envify": "^3.2.0",
     "http-server": "^0.7.5",
     "node-jsx": "^0.12.4",
     "parallelshell": "^1.0.4",
@@ -16,19 +17,22 @@
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "uglify": "^0.1.1",
+    "uglifyify": "^3.0.1",
     "watch": "^0.14.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node ./build.js",
     "watch:build": "watch 'npm run build' ./src",
-    "browserify": "browserify client.js -o js/app.js",
+    "browserify": "browserify client.js -o js/app.min.js",
     "watch:browserify": "watch 'npm run browserify' ./src",
     "start": "parallelshell 'npm run watch:build' 'npm run watch:browserify' 'http-server -p 8000'"
   },
   "browserify": {
     "transform": [
-      "reactify"
+      ["envify", { "NODE_ENV": "production" }],
+      "reactify",
+      "uglifyify"
     ]
   },
   "stylesheet": "http://d2v52k3cl9vedd.cloudfront.net/basscss/5.0.0/basscss.min.css"

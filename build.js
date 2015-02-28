@@ -8,7 +8,8 @@ var Root = require('./src/root.jsx');
 
 Root.getRoutes()
   .forEach(function(route) {
-    var html = Root.renderToString(data, route.path);
+    data.path = route.path;
+    var html = Root.renderToString(data);
     var dir = '.' + route.path + '/';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);

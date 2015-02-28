@@ -8,4 +8,5 @@ var View = React.createFactory(require('./src/view.jsx'));
 var data = require('./data');
 
 React.render(Root(window.INITIAL_PROPS), document);
+//React.render(Root(data), document);
 
