@@ -2,32 +2,27 @@
 var React = require('react');
 
 var Router = require('react-router-component');
-
-var Pages = Router.Pages;
-var Page = Router.Page;
-
 var Locations = Router.Locations;
 var Location = Router.Location;
 var NotFound = Router.NotFound;
-var Link = Router.Link;
 
 var Head = require('./head.jsx');
 var Header = require('./header.jsx');
-var View = require('./view.jsx');
 
-// Pages
+// Views
 var Home = require('./home.jsx');
 var About = require('./about.jsx');
 var NotFoundPage = require('./not-found-page.jsx');
 
+
+// Pages
 var Root = React.createClass({
 
   statics: {
     getRoutes: function() {
       return [
-        { name: 'home', path: '/' },
-        { name: 'about', path: '/about' },
-        // Not found page?
+        { path: '/', handler: Home },
+        { path: '/about', handler: About },
       ];
     },
     renderToString: function(props) {
@@ -43,16 +38,24 @@ var Root = React.createClass({
       __html:
         "window.INITIAL_PROPS = " + JSON.stringify(this.props) + ";\n"
     };
+    var script = this.props.script;
+    var renderLocation = function(route) {
+      return (
+        <Location path={route.path} handler={route.handler} />
+      )
+    };
     return (
       <html>
         <Head {...this.props} />
         <body>
           <Header />
           <Locations path={this.props.path}>
-            <Location path="*" handler={View} />
+            <Location path="/" handler={Home} />
+            <Location path="/about" handler={About} />
+            <NotFound handler={NotFoundPage} />
           </Locations>
           <script dangerouslySetInnerHTML={browserInitScriptObj} />
-          <script src="/js/app.min.js" />
+          <script src={script} />
         </body>
       </html>
     )

@@ -5,15 +5,22 @@ require('node-jsx').install();
 
 var data = require('./data');
 var Root = require('./src/root.jsx');
+//var App = require('./src/app.jsx');
 
-Root.getRoutes()
-  .forEach(function(route) {
+Root.getRoutes().forEach(function(route) {
     data.path = route.path;
+
     var html = Root.renderToString(data);
     var dir = '.' + route.path + '/';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
-    fs.writeFileSync(path.join(__dirname, dir + 'index.html'), html);
+    var filename = 'index.html';
+    fs.writeFileSync(path.join(__dirname, dir + filename), html);
   });
+
+// Render 404
+data.path = '404';
+var html = Root.renderToString(data);
+fs.writeFileSync(path.join(__dirname, './404.html'), html);
 
