@@ -30,7 +30,7 @@ module.exports = function(options) {
   }
 
   function renderRoute(route, i) {
-    if (route.path == '') { return false }
+    //if (route.path == '') { return false }
     return (
       <Route {...props}
         key={'route-' + i}
@@ -50,9 +50,9 @@ module.exports = function(options) {
 
   return (
     <Route name="root"
-      path={props.baseUrl}
+      path={baseUrl}
       handler={Root}>
-      {props.routes.map(renderRoute)}
+      {routes.map(renderRoute)}
       {redirects.map(renderRedirect)}
       <DefaultRoute {...this.props} name="Default" handler={Default}/>
     </Route>

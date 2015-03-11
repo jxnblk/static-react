@@ -14,7 +14,7 @@ module.exports = function(options) {
 
   var options = options || {};
   _.defaults(options, {
-    baseUrl: '',
+    baseUrl: '/',
     routes: [],
     redirects: [],
     props: {},
@@ -22,6 +22,18 @@ module.exports = function(options) {
     Root: false,
     Default: false,
   });
+
+  // Map props.stylesheets and props.scripts to baseUrl
+  /* Example from rebass:
+    var stylesheets = [];
+    this.props.stylesheets.map(function(stylesheet) {
+      if (!stylesheet.match(/^http|^\/\//)) {
+        stylesheet = baseUrl + stylesheet;
+      }
+      stylesheets.push(stylesheet);
+    });
+  */
+  // Add custom <head> options to react-html
 
   options.routes.map(function(route) {
     Router.run(routes(options), options.baseUrl + route.path, function(Handler, state) {

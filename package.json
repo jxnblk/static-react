@@ -16,13 +16,18 @@
   "devDependencies": {
     "browserify": "^9.0.3",
     "http-server": "^0.7.5",
+    "parallelshell": "^1.1.1",
+    "react-html": "0.0.4",
     "react-tools": "^0.12.2",
-    "reactify": "^1.0.0"
+    "reactify": "^1.0.0",
+    "watch": "^0.14.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "node ./examples/build.js",
-    "serve": "http-server -p 8000"
+    "watch:example": "watch 'npm run example' ./examples",
+    "serve": "http-server -p 8000",
+    "start": "parallelshell 'npm run watch:example' 'npm run serve'"
   },
   "browserify": {
     "transform": [
