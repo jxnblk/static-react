@@ -1,3 +1,4 @@
+// Example client script
 
 var React = require('react');
 
