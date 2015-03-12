@@ -1,9 +1,9 @@
 
 var build = require('./build');
-var app = require('./build');
+//var app = require('./app');
 
 module.exports = {
   build: build,
-  app: app
+  app: require('./app')
 };
 

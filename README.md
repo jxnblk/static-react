@@ -43,9 +43,9 @@ module.exports = {
 ### Example build script
 
 ```js
-var staticReact = require('static-react');
+var build = require('static-react/build');
 var options = require('./config'); // Custom app config
-staticReact.build(options); // Writes static HTML to destination
+build(options); // Writes static HTML to destination
 ```
 
 ### Example client app
@@ -53,7 +53,7 @@ staticReact.build(options); // Writes static HTML to destination
 ```js
 var React = require('react');
 var options = require('./config');
-require('static-react').app(options);
+require('static-react/app')(options);
 ```
 
 

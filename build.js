@@ -12,7 +12,6 @@ var routes = require('./routes.jsx');
 
 module.exports = function(options) {
 
-  console.log('build options', options);
   var options = options || {};
   _.defaults(options, {
     baseUrl: '/',
@@ -25,17 +24,18 @@ module.exports = function(options) {
   });
 
 
-  // Map props.stylesheets and props.scripts to baseUrl
-  /* Example from rebass:
-    var stylesheets = [];
-    this.props.stylesheets.map(function(stylesheet) {
-      if (!stylesheet.match(/^http|^\/\//)) {
-        stylesheet = baseUrl + stylesheet;
-      }
-      stylesheets.push(stylesheet);
-    });
-  */
-  // Add custom <head> options to react-html
+  // - Map props.stylesheets and props.scripts to baseUrl
+    /* Example from rebass:
+      var stylesheets = [];
+      this.props.stylesheets.map(function(stylesheet) {
+        if (!stylesheet.match(/^http|^\/\//)) {
+          stylesheet = baseUrl + stylesheet;
+        }
+        stylesheets.push(stylesheet);
+      });
+    */
+  // - Add custom <head> options to react-html
+  // - Map links to baseUrl? 
 
   options.routes.map(function(route) {
     Router.run(routes(options), options.baseUrl + route.path, function(Handler, state) {

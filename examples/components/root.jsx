@@ -12,8 +12,10 @@ var Root = React.createClass({
   render: function() {
     return (
       <Html {...this.props}>
-        <Header />
-        <RouteHandler {...this.props} {...this.state} />
+        <div className="p2">
+          <Header {...this.props} />
+          <RouteHandler {...this.props} {...this.state} />
+        </div>
       </Html>
     )
   }

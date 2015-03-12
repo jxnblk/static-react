@@ -21,6 +21,7 @@ module.exports = function(options) {
   var props = options.props;
 
   function renderRedirect(redirect, i) {
+    console.log(redirect.from, redirect.to);
     return (
       <Redirect {...props}
         key={'redirect-' + i}
@@ -30,7 +31,7 @@ module.exports = function(options) {
   }
 
   function renderRoute(route, i) {
-    //if (route.path == '') { return false }
+    if (route.path == '') { return false }
     return (
       <Route {...props}
         key={'route-' + i}
@@ -40,13 +41,18 @@ module.exports = function(options) {
     )
   }
 
-  var allRedirects = [];
-  routes.forEach(function(route) {
-    if (route.path == '') { return false }
-    allRedirects.push({ from: route.path + '/', to: route.name });
-  });
+  /* This is causing errors
+    var allRedirects = [];
+    routes.forEach(function(route) {
+      if (route.path == '') { return false }
+      allRedirects.push({ from: route.path + '/', to: route.name });
+    });
 
-  redirects = allRedirects.concat(redirects);
+    //redirects = allRedirects.concat(redirects);
+  console.log('redirects', redirects);
+  */
+
+  //console.log('routes options', options);
 
   return (
     <Route name="root"

@@ -24,10 +24,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "example:html": "node ./examples/build.js",
+    "example:html": "node ./examples/src/build.js",
     "watch:example:html": "watch 'npm run example:html' ./examples/components",
-    "example:js": "browserify examples/app.js -o examples/js/app.js",
-    "watch:example:js": "watch 'npm run example:js' ./examples -w 1",
+    "example:js": "browserify examples/src/app.js -o examples/js/app.js",
+    "watch:example:js": "watch 'npm run example:js' ./examples/components",
     "serve": "http-server -p 8000",
     "start:example": "parallelshell 'npm run watch:example:html' 'npm run watch:example:js'"
   },

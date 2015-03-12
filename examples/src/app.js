@@ -3,5 +3,7 @@
 var React = require('react');
 
 var options = require('./config');
-var App = require('..').app(options);
+require('../../app')(options);
+// Not working...
+//var App = require('../..').app(options);
 
