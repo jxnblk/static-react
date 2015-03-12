@@ -2,11 +2,11 @@
 var React = require('react');
 
 var pkg = require('../../package.json');
-var Home = require('../components/home.jsx');
-var About = require('../components/about.jsx');
-var Docs = require('../components/docs.jsx');
-var Root = require('../components/root.jsx');
-var Default = require('../components/home.jsx');
+var Home = require('./components/home.jsx');
+var About = require('./components/about.jsx');
+var Docs = require('./components/docs.jsx');
+var Root = require('./components/root.jsx');
+var Default = require('./components/home.jsx');
 
 var routes = [
   {

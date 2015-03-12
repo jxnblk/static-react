@@ -4,7 +4,7 @@
   "description": "React static site generator",
   "author": "Brent Jackson",
   "license": "MIT",
-  "main": "index.js",
+  "main": "build.js",
   "peerDependencies": {
     "react": "^0.12.2",
     "react-router": "^0.12.4"
@@ -25,9 +25,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example:html": "node ./examples/src/build.js",
-    "watch:example:html": "watch 'npm run example:html' ./examples/components",
+    "watch:example:html": "watch 'npm run example:html' ./examples/src/components",
     "example:js": "browserify examples/src/app.js -o examples/js/app.js",
-    "watch:example:js": "watch 'npm run example:js' ./examples/components",
+    "watch:example:js": "watch 'npm run example:js' ./examples/src/components",
     "serve": "http-server -p 8000",
     "start:example": "parallelshell 'npm run watch:example:html' 'npm run watch:example:js'"
   },

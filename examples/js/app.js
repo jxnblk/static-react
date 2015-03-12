@@ -7,14 +7,12 @@ var routes = require('./routes.jsx');
 
 module.exports = function(options) {
 
-  //var options = options || {};
-  console.log('app options', options);
   try {
     return Router.run(routes(options), Router.HistoryLocation, function(Handler, state) {
         React.render(React.createElement(Handler, window.INITIAL_PROPS), document);
     });
   } catch(e) {
-    console.log('Router couldnt run.');
+    console.error('Router error');
     console.error(e);
   }
 
@@ -23,6 +21,17 @@ module.exports = function(options) {
 
 
 },{"./routes.jsx":199,"react":197,"react-router":38}],2:[function(require,module,exports){
+// Example client script
+
+var React = require('react');
+
+var options = require('./config');
+require('../../app')(options);
+
+
+
+
+},{"../../app":1,"./config":8,"react":197}],3:[function(require,module,exports){
 
 var React = require('react');
 
@@ -38,7 +47,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"react":197}],3:[function(require,module,exports){
+},{"react":197}],4:[function(require,module,exports){
 
 var React = require('react');
 
@@ -53,7 +62,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"react":197}],4:[function(require,module,exports){
+},{"react":197}],5:[function(require,module,exports){
 
 var React = require('react');
 var Router = require('react-router');
@@ -79,7 +88,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"react":197,"react-router":38}],5:[function(require,module,exports){
+},{"react":197,"react-router":38}],6:[function(require,module,exports){
 
 var React = require('react');
 
@@ -94,7 +103,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"react":197}],6:[function(require,module,exports){
+},{"react":197}],7:[function(require,module,exports){
 // Example root component
 
 var React = require('react');
@@ -123,28 +132,16 @@ module.exports = Root;
 
 
 
-},{"./header.jsx":4,"react":197,"react-html":10,"react-router":38}],7:[function(require,module,exports){
-// Example client script
-
-var React = require('react');
-
-var options = require('./config');
-require('../../app')(options);
-// Not working...
-//var App = require('../..').app(options);
-
-
-
-},{"../../app":1,"./config":8,"react":197}],8:[function(require,module,exports){
+},{"./header.jsx":5,"react":197,"react-html":10,"react-router":38}],8:[function(require,module,exports){
 
 var React = require('react');
 
 var pkg = require('../../package.json');
-var Home = require('../components/home.jsx');
-var About = require('../components/about.jsx');
-var Docs = require('../components/docs.jsx');
-var Root = require('../components/root.jsx');
-var Default = require('../components/home.jsx');
+var Home = require('./components/home.jsx');
+var About = require('./components/about.jsx');
+var Docs = require('./components/docs.jsx');
+var Root = require('./components/root.jsx');
+var Default = require('./components/home.jsx');
 
 var routes = [
   {
@@ -187,7 +184,7 @@ module.exports = {
 
 
 
-},{"../../package.json":198,"../components/about.jsx":2,"../components/docs.jsx":3,"../components/home.jsx":5,"../components/root.jsx":6,"react":197}],9:[function(require,module,exports){
+},{"../../package.json":198,"./components/about.jsx":3,"./components/docs.jsx":4,"./components/home.jsx":6,"./components/root.jsx":7,"react":197}],9:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -21389,7 +21386,7 @@ module.exports={
   "description": "React static site generator",
   "author": "Brent Jackson",
   "license": "MIT",
-  "main": "index.js",
+  "main": "build.js",
   "peerDependencies": {
     "react": "^0.12.2",
     "react-router": "^0.12.4"
@@ -21410,9 +21407,9 @@ module.exports={
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example:html": "node ./examples/src/build.js",
-    "watch:example:html": "watch 'npm run example:html' ./examples/components",
+    "watch:example:html": "watch 'npm run example:html' ./examples/src/components",
     "example:js": "browserify examples/src/app.js -o examples/js/app.js",
-    "watch:example:js": "watch 'npm run example:js' ./examples/components",
+    "watch:example:js": "watch 'npm run example:js' ./examples/src/components",
     "serve": "http-server -p 8000",
     "start:example": "parallelshell 'npm run watch:example:html' 'npm run watch:example:js'"
   },
@@ -21443,10 +21440,6 @@ var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 var Redirect = Router.Redirect;
 
-//var Root = require('./components/root.jsx');
-//var Home = require('./components/Home.jsx');
-//var NotFound = require('./components/404.jsx');
-
 module.exports = function(options) { 
 
   var options = options || {};
@@ -21455,42 +21448,34 @@ module.exports = function(options) {
   var Default = options.Default;
   var baseUrl = options.baseUrl;
   var routes = options.routes;
-  var redirects = options.redirects;
   var props = options.props;
 
+  var redirects = [].concat(options.redirects);
+  routes.forEach(function(route) {
+    if (route.path == '') { return false }
+    redirects.push({ from: route.path+'/', to: route.name });
+  });
+
+
   function renderRedirect(redirect, i) {
-    console.log(redirect.from, redirect.to);
     return (
-      React.createElement(Redirect, React.__spread({},  props, 
-        {key: 'redirect-' + i, 
+      React.createElement(Redirect, {
+        key: 'redirect-' + i, 
         from: redirect.from, 
-        to: redirect.to}))
+        to: redirect.to})
     )
   }
 
   function renderRoute(route, i) {
     if (route.path == '') { return false }
     return (
-      React.createElement(Route, React.__spread({},  props, 
-        {key: 'route-' + i, 
+      React.createElement(Route, {
+        key: 'route-' + i, 
         name: route.name, 
         path: route.path, 
-        handler: route.handler}))
+        handler: route.handler})
     )
   }
-
-  /* This is causing errors
-    var allRedirects = [];
-    routes.forEach(function(route) {
-      if (route.path == '') { return false }
-      allRedirects.push({ from: route.path + '/', to: route.name });
-    });
-
-    //redirects = allRedirects.concat(redirects);
-  console.log('redirects', redirects);
-  */
-
-  //console.log('routes options', options);
 
   return (
     React.createElement(Route, {name: "root", 
@@ -21507,4 +21492,4 @@ module.exports = function(options) {
 
 
 
-},{"react":197,"react-router":38}]},{},[7]);
+},{"react":197,"react-router":38}]},{},[2]);

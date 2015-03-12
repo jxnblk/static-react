@@ -37,7 +37,7 @@ module.exports = function(options) {
   // - Add custom <head> options to react-html
   // - Map links to baseUrl? 
 
-  options.routes.map(function(route) {
+  options.routes.map(function(route, i) {
     Router.run(routes(options), options.baseUrl + route.path, function(Handler, state) {
       var html = React.renderToString(React.createElement(Handler, options.props));
       var dir = path.join(__dirname, options.dest + route.path + '/');
