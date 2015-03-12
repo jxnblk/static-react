@@ -12,6 +12,7 @@ var routes = require('./routes.jsx');
 
 module.exports = function(options) {
 
+  console.log('build options', options);
   var options = options || {};
   _.defaults(options, {
     baseUrl: '/',
@@ -22,6 +23,7 @@ module.exports = function(options) {
     Root: false,
     Default: false,
   });
+
 
   // Map props.stylesheets and props.scripts to baseUrl
   /* Example from rebass:
