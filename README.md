@@ -7,31 +7,37 @@ Static site generator using React and React Router
 ### Example config
 
 ```js
+var path = require('path');
 var pkg = require('./package.json');
 var Home = require('./components/home.jsx');
 var About = require('./components/about.jsx');
 
+var baseUrl = '/';
+var routes = [
+  {
+    path: '',
+    name: 'Home',
+    handler: Home,
+  },
+  {
+    path: 'about',
+    name: 'About',
+    handler: About,
+  },
+];
+
 module.exports = {
-  baseUrl: '/',
-  routes: [
-    {
-      path: '',
-      name: 'Home',
-      handler: Home,
-    },
-    {
-      path: 'about',
-      name: 'About',
-      handler: About,
-    },
-  ],
+  baseUrl: baseUrl,
+  routes: routes,
   redirects: [
   ],
-  dest: './',
+  dest: path.join(__dirname, './'),
   props: {
     name: pkg.name,
     description: pkg.description,
     version: pkg.version,
+    baseUrl: baseUrl,
+    routes: routes,
     stylesheets: [ '/css/base.css' ],
     scripts: [ '/js/app.js' ],
   },
