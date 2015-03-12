@@ -21382,8 +21382,8 @@ module.exports = require('./lib/React');
 },{"./lib/React":78}],198:[function(require,module,exports){
 module.exports={
   "name": "static-react",
-  "version": "1.0.0",
-  "description": "React static site generator",
+  "version": "0.0.1",
+  "description": "React static HTML generator for use with react-router-component",
   "author": "Brent Jackson",
   "license": "MIT",
   "main": "build.js",
