@@ -1,74 +1,90 @@
-# Static React
+# static-react
 
-Build script for rendering static HTML files with React.
-Intended for use with `react-router-component`.
+Static site generator using React and React Router
 
 ## Usage
 
-### Example Root component
-```jsx
-// root.jsx
+### Example config
+
+```js
+var pkg = require('./package.json');
+var Home = require('./components/home.jsx');
+var About = require('./components/about.jsx');
+
+module.exports = {
+  baseUrl: '/',
+  routes: [
+    {
+      path: '',
+      name: 'Home',
+      handler: Home,
+    },
+    {
+      path: 'about',
+      name: 'About',
+      handler: About,
+    },
+  ],
+  redirects: [
+  ],
+  dest: './',
+  props: {
+    name: pkg.name,
+    description: pkg.description,
+    version: pkg.version,
+    stylesheets: [ '/css/base.css' ],
+    scripts: [ '/js/app.js' ],
+  },
+  Root: require('./components/root.jsx'),
+  Default: require('./components/home.jsx'),
+};
+```
+
+### Example build script
+
+```js
+var build = require('static-react/build');
+var options = require('./config'); // Custom app config
+build(options); // Writes static HTML to destination
+```
+
+### Example client app
+
+```js
 var React = require('react');
-var Router = require('react-router-component');
-var Locations = Router.Locations;
-var Location = Router.Location;
-var NotFound = Router.NotFound;
+var options = require('./config');
+require('static-react/app')(options);
+```
+
+
+### Example Root component
+
+```js
+// Example root component
+
+var React = require('react');
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 
 var Html = require('react-html');
 var Header = require('./header.jsx');
-var Footer = require('./footer.jsx');
-var Home = require('./home.jsx');
-var About = require('./about.jsx');
-var NotFoundPage = require('./not-found-page.jsx');
 
-module.exports = React.createClass({
+var Root = React.createClass({
+
   render: function() {
     return (
       <Html {...this.props}>
         <Header />
-        <Locations path={this.props.path}>
-          <Location path="/" handler={Home} />
-          <Location path="/about" handler={About} />
-          <NotFound handler={NotFoundPage} />
-        </Locations>
-        <Footer />
+        <RouteHandler {...this.props} {...this.state} />
       </Html>
     )
   }
+
 });
+
+module.exports = Root;
 ```
 
-### Example build script
-```js
-// build.js
+---
 
-var staticReact = require('static-react');
-var Root = require('./src/root.jsx');
-var props = {
-  title: 'My App',
-  routes: [
-    { path: '/' },
-    { path: '/about' },
-  ]
-};
-
-staticReact({
-  dir: __dirname,
-  Root: Root,
-  props: props
-});
-```
-
-### Run build script
-```bash
-node build
-```
-
-## Example client js source
-```js
-var React = require('react');
-var Root = React.createFactory(require('./src/root.jsx'));
-
-React.render(Root(window.INITIAL_PROPS), document);
-```
-
+MIT License

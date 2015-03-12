@@ -4,9 +4,48 @@
   "description": "React static HTML generator for use with react-router-component",
   "author": "Brent Jackson",
   "license": "MIT",
-  "main": "index.js",
+  "main": "build.js",
+  "peerDependencies": {
+    "react": "^0.12.2",
+    "react-router": "^0.12.4"
+  },
   "dependencies": {
-    "node-jsx": "^0.12.4",
-    "react": "^0.12.2"
-  }
+    "lodash": "^3.5.0",
+    "node-jsx": "^0.12.4"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "http-server": "^0.7.5",
+    "parallelshell": "^1.1.1",
+    "react-html": "0.0.4",
+    "react-tools": "^0.12.2",
+    "reactify": "^1.0.0",
+    "watch": "^0.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "example:html": "node ./examples/src/build.js",
+    "watch:example:html": "watch 'npm run example:html' ./examples/src/components",
+    "example:js": "browserify examples/src/app.js -o examples/js/app.js",
+    "watch:example:js": "watch 'npm run example:js' ./examples/src/components",
+    "serve": "http-server -p 8000",
+    "start:example": "parallelshell 'npm run watch:example:html' 'npm run watch:example:js'"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jxnblk/static-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jxnblk/static-react/issues"
+  },
+  "homepage": "https://github.com/jxnblk/static-react"
 }
