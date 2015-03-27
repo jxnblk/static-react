@@ -29,7 +29,7 @@ if (program.args) {
   var noscript = program.noscript;
   // Set defaults
   var rootSource = program.args[0];
-  var dest = program.args[1];
+  var dest = path.join(dir, program.args[1]);
   var html;
 
   options.Root = require(path.join(dir, rootSource));
@@ -42,10 +42,12 @@ if (program.args) {
   }
 
   try {
-    fs.writeFileSync(dest + 'index.html', html);
-    console.log(('File written to ' + dest + 'index.html').green);
+    var filename = path.join(dest, './index.html');
+    console.log(filename);
+    fs.writeFileSync(filename, html);
+    console.log(('File written to ' + filename).green);
   } catch(e) {
-    console.log('Could not write file to ' + dest + 'index.html'.red.bold);
+    console.log(('Could not write file to ' + filename).red.bold);
     console.log(e.red);
   }
 
