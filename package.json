@@ -1,12 +1,12 @@
 {
   "name": "static-react",
-  "version": "2.0.0-beta2",
+  "version": "2.0.0-beta3",
   "description": "React static HTML generator for use with react-router-component",
   "author": "Brent Jackson",
   "license": "MIT",
   "main": "index.js",
   "peerDependencies": {
-    "react": ">=0.12.2<1.0.0"
+    "react": ">=0.12.2"
   },
   "dependencies": {
     "colors": "^1.0.3",
