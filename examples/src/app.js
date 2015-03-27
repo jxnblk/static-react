@@ -3,6 +3,5 @@
 var React = require('react');
 
 var options = require('./config');
-require('../../app')(options);
-
+require('../../client')(options);
 

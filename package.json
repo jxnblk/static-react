@@ -6,8 +6,7 @@
   "license": "MIT",
   "main": "build.js",
   "peerDependencies": {
-    "react": "^0.12.2",
-    "react-router": "^0.12.4"
+    "react": "^0.12.2"
   },
   "dependencies": {
     "lodash": "^3.5.0",
@@ -16,20 +15,20 @@
   "devDependencies": {
     "browserify": "^9.0.3",
     "http-server": "^0.7.5",
-    "parallelshell": "^1.1.1",
+    "mocha": "^2.2.1",
     "react-html": "0.0.4",
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "watch": "^0.14.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test",
     "example:html": "node ./examples/src/build.js",
     "watch:example:html": "watch 'npm run example:html' ./examples/src/components",
     "example:js": "browserify examples/src/app.js -o examples/js/app.js",
     "watch:example:js": "watch 'npm run example:js' ./examples/src/components",
     "serve": "http-server -p 8000",
-    "start:example": "parallelshell 'npm run watch:example:html' 'npm run watch:example:js'"
+    "start": "npm run watch:example:html & npm run watch:example:js & npm run serve"
   },
   "browserify": {
     "transform": [
