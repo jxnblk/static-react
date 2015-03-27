@@ -1,27 +1,26 @@
 {
   "name": "static-react",
-  "version": "2.0.0-beta1",
+  "version": "2.0.0-beta2",
   "description": "React static HTML generator for use with react-router-component",
   "author": "Brent Jackson",
   "license": "MIT",
   "main": "index.js",
   "peerDependencies": {
-    "react": "^0.12.2"
+    "react": ">=0.12.2<1.0.0"
   },
   "dependencies": {
     "colors": "^1.0.3",
     "lodash": "^3.5.0",
+    "commander": "^2.7.1",
+    "react-tools": "^0.12.2",
     "node-jsx": "^0.12.4"
   },
   "devDependencies": {
     "browserify": "^9.0.3",
-    "colors": "^1.0.3",
-    "commander": "^2.7.1",
     "html-validator": "0.0.8",
     "http-server": "^0.7.5",
     "mocha": "^2.2.1",
     "react-html": "^1.0.0",
-    "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "watch": "^0.14.0"
   },
