@@ -80,12 +80,13 @@ var Root = require('./components/root.jsx');
 module.exports = {
   props: {
     name: pkg.name,
+    title: pkg.name,
     description: pkg.description,
     version: pkg.version,
     stylesheets: [
       'http://d2v52k3cl9vedd.cloudfront.net/bassdock/1.0.3/bassdock.min.css'
     ],
-    scripts: [
+    javascripts: [
       'js/app.js'
     ],
   },
@@ -158,7 +159,49 @@ process.umask = function() { return 0; };
 
 var React = require('react');
 
-var Head = React.createClass({displayName: "Head",
+var Html = React.createClass({displayName: "Html",
+
+  getDefaultProps: function() {
+    return {
+      title: '',
+      description: '',
+      author: '',
+      favicon: false,
+      javascripts: [],
+      stylesheets: [],
+    }
+  },
+
+  renderScript: function(script, i) {
+    return (React.createElement("script", {src: script, key: 'script-' + i}));
+  },
+
+  render: function() {
+    var ownerProps = this._owner ? this._owner.props : {};
+    var init = {
+      __html: "window.INITIAL_PROPS = " + JSON.stringify(ownerProps) + ";\n"
+    };
+    var javascripts = [];
+    if (this.props.script) {
+      javascripts = [this.props.script];
+    } else if (this.props.javascripts) {
+      javascripts = this.props.javascripts;
+    }
+    return (
+      React.createElement("html", null, 
+        React.createElement(Html.Head, React.__spread({},  this.props)), 
+        React.createElement("body", null, 
+          this.props.children, 
+          React.createElement("script", {dangerouslySetInnerHTML: init}), 
+          javascripts.map(this.renderScript)
+        )
+      )
+    )
+  }
+
+});
+
+Html.Head = React.createClass({displayName: "Head",
 
   getDefaultProps: function() {
     return {
@@ -204,46 +247,8 @@ var Head = React.createClass({displayName: "Head",
 });
 
 
-module.exports = React.createClass({displayName: "exports",
 
-  getDefaultProps: function() {
-    return {
-      title: '',
-      description: '',
-      author: '',
-      favicon: false,
-      scripts: [],
-      stylesheets: [],
-    }
-  },
-
-  renderScript: function(script, i) {
-    return (React.createElement("script", {src: script, key: 'script-' + i}));
-  },
-
-  render: function() {
-    var init = {
-      __html: "window.INITIAL_PROPS = " + JSON.stringify(this._owner.props) + ";\n"
-    };
-    var scripts = [];
-    if (this.props.script) {
-      scripts = [this.props.script];
-    } else if (this.props.scripts) {
-      scripts = this.props.scripts;
-    }
-    return (
-      React.createElement("html", null, 
-        React.createElement(Head, React.__spread({},  this.props)), 
-        React.createElement("body", null, 
-          this.props.children, 
-          React.createElement("script", {dangerouslySetInnerHTML: init}), 
-          scripts.map(this.renderScript)
-        )
-      )
-    )
-  }
-
-});
+module.exports = Html;
 
 
 },{"react":153}],8:[function(require,module,exports){
@@ -18491,9 +18496,12 @@ module.exports={
   },
   "devDependencies": {
     "browserify": "^9.0.3",
+    "colors": "^1.0.3",
+    "commander": "^2.7.1",
+    "html-validator": "0.0.8",
     "http-server": "^0.7.5",
     "mocha": "^2.2.1",
-    "react-html": "0.0.4",
+    "react-html": "^1.0.0",
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "watch": "^0.14.0"

@@ -13,7 +13,7 @@ module.exports = {
     stylesheets: [
       'http://d2v52k3cl9vedd.cloudfront.net/bassdock/1.0.3/bassdock.min.css'
     ],
-    scripts: [
+    javascripts: [
       'js/app.js'
     ],
   },

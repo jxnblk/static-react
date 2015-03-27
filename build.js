@@ -12,12 +12,18 @@ module.exports = function(options) {
   _.defaults(options, {
     props: {},
     Root: false,
+    noScript: false,
   });
 
+  var html;
   var Root = options.Root;
 
   try {
-    var html = React.renderToString(React.createElement(Root, options.props));
+    if (options.noScript) {
+      html = React.renderToStaticMarkup(React.createElement(Root, options.props));
+    } else {
+      html = React.renderToString(React.createElement(Root, options.props));
+    }
   } catch(e) {
     console.error('static-react renderToString error');
     console.error(e);

@@ -19,7 +19,7 @@
     "html-validator": "0.0.8",
     "http-server": "^0.7.5",
     "mocha": "^2.2.1",
-    "react-html": "0.0.4",
+    "react-html": "^1.0.0",
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "watch": "^0.14.0"
