@@ -23,9 +23,11 @@ module.exports = function(options) {
     console.error(e);
   }
 
+  html = '<!DOCTYPE html>\n' + html;
+
   return html;
 
-  /* Put this in CLI
+  /* Move this to CLI
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }

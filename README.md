@@ -1,12 +1,17 @@
 # static-react
 
-Static site generator using React and React Router
+Static site generator using React
+
+```bash
+npm install static-react
+```
 
 ## Usage
 
-### Example config
+### Create a config file
 
 ```js
+// Example config.js
 var pkg = require('./package.json');
 var Root = require('./components/root.jsx');
 
@@ -22,9 +27,10 @@ module.exports = {
 };
 ```
 
-### Example build script
+### Create a build script
 
 ```js
+// Example build.js
 var fs = require('fs');
 var build = require('static-react/build');
 var options = require('./config'); // Custom app config
@@ -32,16 +38,19 @@ var html = build(options); // Returns static HTML
 fs.writeFileSync('./index.html', html); // Write file to disk
 ```
 
-### Example client app
+### Create a client-side entry.js
+
+Use Browserify, Webpack, or a similar tool to create the client side bundle.
 
 ```js
+// Example entry.js
 var React = require('react');
 var options = require('./config');
 require('static-react/client')(options);
 ```
 
 
-### Example Root component
+### Create a Root component
 
 ```js
 // Example root component
