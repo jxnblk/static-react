@@ -4,11 +4,12 @@
   "description": "React static HTML generator for use with react-router-component",
   "author": "Brent Jackson",
   "license": "MIT",
-  "main": "build.js",
+  "main": "index.js",
   "peerDependencies": {
     "react": "^0.12.2"
   },
   "dependencies": {
+    "colors": "^1.0.3",
     "lodash": "^3.5.0",
     "node-jsx": "^0.12.4"
   },
@@ -31,6 +32,7 @@
     "example:js": "browserify examples/src/app.js -o examples/js/app.js",
     "watch:example:js": "watch 'npm run example:js' ./examples/src/components",
     "serve": "http-server -p 8000",
+    "cli": "node bin/static-react",
     "start": "npm run watch:example:html & npm run watch:example:js & npm run serve"
   },
   "browserify": {
@@ -49,5 +51,12 @@
   "bugs": {
     "url": "https://github.com/jxnblk/static-react/issues"
   },
-  "homepage": "https://github.com/jxnblk/static-react"
+  "homepage": "https://github.com/jxnblk/static-react",
+  "static-react": {
+    "note": "This is the configuration object for the CLI",
+    "noScript": "true",
+    "props": {
+      "title": "CLI Test"
+    }
+  }
 }

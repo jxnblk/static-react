@@ -1,2 +1,0 @@
-
-var program = require('commander');
