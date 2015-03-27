@@ -17,6 +17,7 @@ if (fs.existsSync(pkgPath)) {
 }
 
 
+
 program
   .version(version)
   .option('[Root] [dest]', 'Path to Root react component and destination folder')
@@ -43,7 +44,6 @@ if (program.args) {
 
   try {
     var filename = path.join(dest, './index.html');
-    console.log(filename);
     fs.writeFileSync(filename, html);
     console.log(('File written to ' + filename).green);
   } catch(e) {

@@ -33,14 +33,5 @@ module.exports = function(options) {
 
   return html;
 
-  /* Move this to CLI
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
-    var filename = path.join(dir, 'index.html');
-    fs.writeFileSync(filename, html);
-    console.log('HTML written to ', filename);
-  */
-
 }
 
