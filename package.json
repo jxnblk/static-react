@@ -1,6 +1,6 @@
 {
   "name": "static-react",
-  "version": "2.0.0-beta3",
+  "version": "2.0.0-beta5",
   "description": "React static HTML generator for use with react-router-component",
   "author": "Brent Jackson",
   "license": "MIT",
@@ -33,6 +33,9 @@
     "serve": "http-server -p 8000",
     "cli": "node bin/static-react",
     "start": "npm run watch:example:html & npm run watch:example:js & npm run serve"
+  },
+  "bin": {
+    "static-react": "bin/static-react.js"
   },
   "browserify": {
     "transform": [
