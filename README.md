@@ -73,6 +73,23 @@ var Root = React.createClass({
 module.exports = Root;
 ```
 
+## CLI
+
+Pass paths to the root component and destination directory.
+
+```bash
+static-react src/Root.jsx demo
+```
+
+Options can be set in `package.json`.
+
+```json
+"static-react": {
+  "props": {
+  }
+}
+```
+
 ---
 
 MIT License

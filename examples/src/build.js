@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var build = require('../../build');
+var build = require('../..').build;
 var options = require('./config');
 var html = build(options);
 

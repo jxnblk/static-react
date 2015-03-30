@@ -14,7 +14,7 @@ module.exports = {
       'http://d2v52k3cl9vedd.cloudfront.net/bassdock/1.0.3/bassdock.min.css'
     ],
     javascripts: [
-      'js/app.js'
+      'bundle.js'
     ],
   },
   Root: Root,
