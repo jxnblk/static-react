@@ -1,5 +1,7 @@
 # static-react
 
+*Note: this was an early attempt at static site generation with React. I recommend following this approach instead: http://jxnblk.com/writing/posts/static-site-generation-with-react-and-webpack/*
+
 Static site generator using React and React Router
 
 ## Usage
