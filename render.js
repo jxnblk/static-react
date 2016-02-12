@@ -7,5 +7,5 @@ const render = (Component, props) => {
   return html
 }
 
-export default render
+module.exports = render
 
