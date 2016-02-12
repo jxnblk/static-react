@@ -5,8 +5,7 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "scripts": {
-    "test": "mocha test --compilers js:babel-register",
-    "start": "./bin/static-react.js test/Root.js"
+    "test": "mocha test --compilers js:babel-register"
   },
   "bin": {
     "static-react": "./bin/static-react.js"
