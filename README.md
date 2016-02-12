@@ -50,6 +50,8 @@ npm i -D babel-preset-es2015 babel-preset-react
 }
 ```
 
+Babel options can also be added to `package.json` instead of a separate `.babelrc` file.
+
 ---
 
 MIT License
