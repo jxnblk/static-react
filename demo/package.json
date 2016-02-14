@@ -1,0 +1,19 @@
+{
+  "name": "static-react-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "static-react components/Root.js > index.html"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "react": "^0.14.7",
+    "static-react": "^3.0.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  }
+}

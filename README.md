@@ -45,8 +45,7 @@ npm i -D babel-preset-es2015 babel-preset-react
   "presets": [
     "es2015",
     "react"
-  ],
-  "ignore": false
+  ]
 }
 ```
 
