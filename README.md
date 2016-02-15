@@ -2,6 +2,8 @@
 
 Zero-configuration CLI React static renderer
 
+[![Build Status](https://travis-ci.org/jxnblk/static-react.svg)](https://travis-ci.org/jxnblk/static-react)
+
 ## Usage
 
 ### CLI
