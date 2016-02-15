@@ -2,9 +2,10 @@
 
 require('babel-register')
 
+var React = require('react')
+var ReactDOMServer = require('react-dom/server')
 var path = require('path')
 var program = require('commander')
-var render = require('..')
 
 var version = '3.0.0'
 
@@ -35,7 +36,9 @@ if (program.args.length) {
     props = require(path.join(dir, program.props))
   }
 
-  html = render(Component, props)
+  html = ReactDOMServer.renderToStaticMarkup(
+    React.createElement(Component, props)
+  )
 
   if (program.doctype) {
     html = '<!DOCTYPE html>' + html

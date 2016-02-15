@@ -1,6 +1,6 @@
 # static-react
 
-Zero-configuration React static site generator
+Zero-configuration CLI React static renderer
 
 ## Usage
 
@@ -15,24 +15,9 @@ static-react RootComponent.js > index.html
 - `-p`, `--props` - pass props via a file that exports an object
 - `--no-doctype` - omit `<!DOCTYPE html>` from the beginning of the returned string
 
-### Node
-
-```js
-var render = require('static-react')
-var RootComponent = require('./RootComponent')
-
-var html = render(RootComponent)
-```
-
-Optionally pass props in as a second argument.
-
-```js
-var html = render(RootComponent, { title: 'Hello' })
-```
-
 ### With ES2015 & JSX
 
-To use this with ES2015 and JSX syntax, install Babel presets and create a `.babelrc` file.
+To use this with ES2015 and JSX syntax, install Babel presets and create a `.babelrc` file or add a Babel configuration object to `package.json`.
 
 ```
 npm i -D babel-preset-es2015 babel-preset-react
@@ -49,7 +34,9 @@ npm i -D babel-preset-es2015 babel-preset-react
 }
 ```
 
-Babel options can also be added to `package.json` instead of a separate `.babelrc` file.
+### Example
+
+See [/example](example)
 
 ---
 
