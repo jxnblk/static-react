@@ -2,7 +2,7 @@
 import path from 'path'
 import { spawn } from 'child_process'
 import assert from 'assert'
-import isHTML from 'is-html'
+import isHtml from 'is-html'
 import cheerio from 'cheerio'
 
 describe('static-react', () => {
@@ -18,7 +18,7 @@ describe('static-react', () => {
     })
   })
 
-  it('should return html', () => {
+  it('should return html', (done) => {
     const process = spawn(cli, ['test/Root.js'])
 
     process.stdout.on('data', data => {
@@ -28,11 +28,11 @@ describe('static-react', () => {
     })
   })
 
-  it('should render props', () => {
+  it('should render props', (done) => {
     const process = spawn(cli, [
       'test/Root.js',
       '-p',
-      'fixture-props.js'
+      'test/fixture-props.js'
     ])
 
     process.stdout.on('data', data => {
