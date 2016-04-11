@@ -13,7 +13,7 @@ var ReactDOMServer = require('react-dom/server')
 var path = require('path')
 var program = require('commander')
 
-var version = '3.0.0'
+var version = '3.2.0'
 
 program
   .version(version)
