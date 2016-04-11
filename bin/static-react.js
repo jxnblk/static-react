@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
-require('babel-register')
+require('babel-register')({
+  presets: [
+    'es2015',
+    'stage-0',
+    'react'
+  ]
+})
 
 var React = require('react')
 var ReactDOMServer = require('react-dom/server')
