@@ -6,6 +6,12 @@ Zero-configuration CLI React static renderer
 
 ## Usage
 
+```
+npm i -D static-react
+```
+
+Static-react include babel presets and React – there is no need to install them separately with npm 3+.
+
 ### CLI
 
 ```
@@ -17,26 +23,8 @@ static-react RootComponent.js > index.html
 - `-p`, `--props` - pass props via a file that exports an object
 - `--no-doctype` - omit `<!DOCTYPE html>` from the beginning of the returned string
 
-### With ES2015 & JSX
 
-To use this with ES2015 and JSX syntax, install Babel presets and create a `.babelrc` file or add a Babel configuration object to `package.json`.
-
-```
-npm i -D babel-preset-es2015 babel-preset-react
-```
-
-**.babelrc**
-
-```json
-{
-  "presets": [
-    "es2015",
-    "react"
-  ]
-}
-```
-
-### Example
+## Example
 
 See [/example](example)
 
