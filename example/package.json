@@ -5,7 +5,6 @@
     "start": "static-react components/Root.js > index.html"
   },
   "devDependencies": {
-    "react": "^0.14.7",
-    "static-react": "^3.1.0"
+    "static-react": "^3.2.0"
   }
 }
