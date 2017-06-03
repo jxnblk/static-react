@@ -17,8 +17,8 @@ module.exports = (Component, opts = {}) => {
   const head = [
     (doctype ? '<!DOCTYPE html>' : null),
     (title ? `<title>${title}</title>` : null),
-    meta.map(({ name, content }) => `<meta name='${name}' content='${content}'>`),
-    stylesheets.map(href => `<link rel='stylesheet' href='${href}'>`),
+    meta.map(({ name, content }) => `<meta name='${name}' content='${content}'>`).join(''),
+    stylesheets.map(href => `<link rel='stylesheet' href='${href}'>`).join(''),
     (css ? `<style>${css}</style>` : null),
   ]
     .filter(n => n !== null)
