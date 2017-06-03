@@ -1,55 +1,51 @@
 #!/usr/bin/env node
+require('babel-register')()
+const fs = require('fs')
+const path = require('path')
+const meow = require('meow')
+const render = require('../index')
 
-require('babel-register')({
-  presets: [
-    'es2015',
-    'stage-0',
-    'react'
-  ]
+const cli = meow(`
+  Usage
+    $ static-react Component.js > index.html
+
+  Options
+
+    -p, --props     Component props
+    --title         Page title
+    --id            Element id attribute for the wrapping div
+    --meta          List of meta tags to include
+    --css           CSS string to include in the head
+    --stylesheets   List of stylesheets to link
+    ---scripts      List of JavaScript files to include
+    --no-doctype    Omit \`<!DOCTYPE html>\` from the beginning
+    -o, --out       File to write to, otherwise uses stdout
+
+`, {
+  alias: {
+    p: 'props',
+    o: 'out'
+  }
 })
 
-var React = require('react')
-var ReactDOMServer = require('react-dom/server')
-var path = require('path')
-var program = require('commander')
+const [ filepath ] = cli.input
+const dir = process.cwd()
 
-var version = '3.2.0'
+const file = path.join(dir, filepath)
+const mod = require(file)
+const Component = mod.default || mod
 
-program
-  .version(version)
-  .option('[component]', 'Root React component')
-  .option('-p, --props [props]', 'Props')
-  .option('--no-doctype', 'Remove <!DOCTYPE html> from beginning of string')
-  .parse(process.argv)
+const pkgpath = path.join(dir, 'package.json')
+const pkg = require(pkgpath) || {}
 
-if (program.args.length) {
-  var html
-  var props = {}
-  var dir = process.cwd()
-  var file = path.join(dir, program.args[0])
-  var Component = require(file)
+const opts = Object.assign({}, pkg['static-react'], cli.flags)
 
-  if (!Component) {
-    console.error('No component found at', file)
-    return false
-  }
+const html = render(Component, opts)
 
-  if (Component.default) {
-    Component = Component.default
-  }
-
-  if (program.props) {
-    props = require(path.join(dir, program.props))
-  }
-
-  html = ReactDOMServer.renderToStaticMarkup(
-    React.createElement(Component, props)
-  )
-
-  if (program.doctype) {
-    html = '<!DOCTYPE html>' + html
-  }
-
+if (opts.out) {
+  const filename = path.join(dir, opts.out)
+  fs.writeFileSync(filename, html)
+  console.log('File written to "' + opts.out + '"')
+} else {
   process.stdout.write(html)
 }
-
