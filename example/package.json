@@ -14,8 +14,8 @@
     "title": "Hello",
     "meta": [
       {
-        "name": "charset",
-        "content": "utf-8"
+        "name": "description",
+        "content": "Just a demo static-react site"
       },
       {
         "name": "viewport",

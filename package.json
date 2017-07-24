@@ -1,6 +1,6 @@
 {
   "name": "static-react",
-  "version": "4.0.0-1",
+  "version": "4.0.0-2",
   "description": "React static HTML generator",
   "author": "Brent Jackson",
   "license": "MIT",
