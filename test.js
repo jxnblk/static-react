@@ -1,42 +1,41 @@
 const test = require('ava')
-const h = require('react').createElement
-const sr = require('./index')
+const {
+  Component,
+  createElement: h
+} = require('react')
+const render = require('./index')
 
 const Root = props => h('div', null,
   h('h1', null, props.title)
 )
 
+class App extends Component {
+  render () {
+    return h('h1', null, this.props.hi)
+  }
+}
+
+App.getInitialProps = async () => {
+  return { hi: 'hello' }
+}
+
 test('exports a function', t => {
-  t.is(typeof sr, 'function')
+  t.is(typeof render, 'function')
 })
 
-test('returns a string', t => {
-  const html = sr(Root)
+test('returns a string', async t => {
+  const html = await render(Root)
   t.is(typeof html, 'string')
 })
 
-test('accepts options', t => {
-  const html = sr(Root, {
-    props: {
-      title: 'Hello'
-    },
-    title: 'Test render',
-    css: 'body{font-family:-apple-system,sans-serif}',
-    meta: [
-      { name: 'viewport', content: 'width=device-width,initial-scale=1' }
-    ],
-    stylesheets: [
-      'base.css'
-    ],
-    scripts: [
-      'bundle.js'
-    ]
+test('accepts options', async t => {
+  const html = await render(Root, {
+    title: 'Hello',
   })
-  console.log(html)
   t.regex(html, /Hello/)
-  t.regex(html, /Test render/)
-  t.regex(html, /-apple-system/)
-  t.regex(html, /viewport/)
-  t.regex(html, /base\.css/)
-  t.regex(html, /bundle\.js/)
+})
+
+test('getInitialProps', async t => {
+  const html = await render(App)
+  t.regex(html, /hello/)
 })

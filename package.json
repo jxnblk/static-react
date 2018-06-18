@@ -1,26 +1,35 @@
 {
   "name": "static-react",
-  "version": "4.0.0-2",
+  "version": "4.0.0-3",
   "description": "React static HTML generator",
   "author": "Brent Jackson",
   "license": "MIT",
   "scripts": {
-    "test": "ava",
-    "cli-test": "./bin/static-react.js example/Root.js -o example/index.html"
+    "test": "nyc ava",
+    "start": "./cli.js example/Root.js"
   },
   "main": "index.js",
   "bin": {
-    "static-react": "./bin/static-react.js"
+    "static-react": "./cli.js"
   },
   "dependencies": {
-    "babel-register": "^6.24.1",
-    "meow": "^3.7.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "meow": "^5.0.0",
+    "pkg-conf": "^2.1.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "update-notifier": "^2.5.0"
   },
   "devDependencies": {
     "ava": "^0.19.1",
-    "is-html": "^1.0.0"
+    "is-html": "^1.0.0",
+    "nyc": "^12.0.2",
+    "rebass": "^2.0.0-6",
+    "styled-components": "^3.3.2"
   },
   "repository": {
     "type": "git",

@@ -1,1 +1,3 @@
 example
+.travis.yml
+test.js*

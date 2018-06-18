@@ -1,39 +1,15 @@
 const path = require('path')
 const h = require('react').createElement
-const { renderToString } = require('react-dom/server')
+const { renderToStaticMarkup: render } = require('react-dom/server')
 
-module.exports = (Component, opts = {}) => {
-  const {
-    props,
-    id = 'app',
-    title,
-    stylesheets = [],
-    css,
-    meta = [],
-    scripts = [],
-    doctype = true
-  } = opts
+module.exports = async (Component, opts = {}) => {
+  const element = h(Component, opts)
+  const props = typeof Component.getInitialProps === 'function'
+    ? await Component.getInitialProps(element)
+    : {}
+  const html = render(
+    h(Component, Object.assign({}, opts, props))
+  )
 
-  const head = [
-    (doctype ? '<!DOCTYPE html>' : null),
-    (title ? `<title>${title}</title>` : null),
-    `<meta charset='utf-8'>`,
-    meta.map(({ name, content }) => `<meta name='${name}' content='${content}'>`).join(''),
-    stylesheets.map(href => `<link rel='stylesheet' href='${href}'>`).join(''),
-    (css ? `<style>${css}</style>` : null),
-  ]
-    .filter(n => n !== null)
-    .join('')
-
-  const body = renderToString(h(Component, props))
-
-  const suffix = scripts.map(src => `<script src='${src}'></script>`).join('')
-
-  return [
-    head,
-    `<div id='${id}'>`,
-    body,
-    `</div>`,
-    suffix
-  ].join('')
+  return `<!DOCTYPE html>${html}`
 }
