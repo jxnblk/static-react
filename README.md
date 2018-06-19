@@ -3,7 +3,10 @@
 
 Zero-configuration CLI React static renderer
 
-[![Build Status](https://travis-ci.org/jxnblk/static-react.svg)](https://travis-ci.org/jxnblk/static-react)
+[![Build Status][badge]](https://travis-ci.org/jxnblk/static-react)
+
+[badge]: https://img.shields.io/travis/jxnblk/static-react.svg?style=flat-square
+
 
 ## Usage
 
