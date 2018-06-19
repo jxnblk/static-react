@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "test": "nyc ava",
-    "start": "./cli.js example/Root.js"
+    "start": "./cli.js examples/basic.js",
+    "start:sc": "./cli.js examples/styled-components.js",
+    "start:fetch": "./cli.js examples/fetch.js"
   },
   "main": "index.js",
   "bin": {
